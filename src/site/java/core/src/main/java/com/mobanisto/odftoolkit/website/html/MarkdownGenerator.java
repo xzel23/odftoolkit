@@ -2,7 +2,7 @@ package com.mobanisto.odftoolkit.website.html;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -113,7 +113,7 @@ public class MarkdownGenerator extends BaseGenerator
 		String text = htmlBuilder.getDocument().toString();
 		try (OutputStream os = Files.newOutputStream(path)) {
 			os.write("<!DOCTYPE html>".getBytes());
-			os.write(text.getBytes(Charset.forName("UTF-8")));
+			os.write(text.getBytes(StandardCharsets.UTF_8));
 		}
 	}
 
