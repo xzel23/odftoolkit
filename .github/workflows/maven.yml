@@ -18,11 +18,6 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package -Ppedantic --file pom.xml
-      - name: Generate JaCoCo Badge
-        uses: cicirello/jacoco-badge-generator@v2
-        with:
-          generate-branches-badge: true
-          jacoco-csv-file: '**/site/jacoco/jacoco.csv'
 
   #
   # Static analysis with SonarQube
