@@ -52,10 +52,12 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: >
+        run: |
           mvn -B verify
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.projectKey=xzel23_odftoolkit
-          -Dsonar.organization=xzel23
-          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco-aggregate/jacoco.xml
-          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          mkdir -p target/coverage-reports
+          find . -name jacoco.xml -path "*/target/site/jacoco/jacoco.xml" -exec cp {} target/coverage-reports/ \;
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.projectKey=xzel23_odftoolkit \
+            -Dsonar.organization=xzel23 \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/coverage-reports
