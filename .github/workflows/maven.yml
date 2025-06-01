@@ -55,9 +55,9 @@ jobs:
         run: |
           mvn -B verify
           mkdir -p target/coverage-reports
-          find . -name jacoco.xml -path "*/target/site/jacoco/jacoco.xml" -exec cp {} target/coverage-reports/ \;
+          cp target/site/jacoco-aggregate/jacoco.xml target/coverage-reports/jacoco.xml
           mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.projectKey=xzel23_odftoolkit \
-            -Dsonar.organization=xzel23 \
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/coverage-reports
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.projectKey=xzel23_odftoolkit \
+              -Dsonar.organization=xzel23 \
+              -Dsonar.coverage.jacoco.xmlReportPaths=target/coverage-reports/jacoco.xml
